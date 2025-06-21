@@ -1,16 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000,
-    proxy: {
-      '/tmf-api': {
-        target: 'http://localhost:80',
-        changeOrigin: true,
-        secure: false,
+export default defineConfig(({ command }) => {
+  return {
+    plugins: [react()],
+    server: command === 'serve' ? {
+      port: 3000,
+      proxy: {
+        '/tmf-api': {
+          target: 'http://localhost:80',
+          changeOrigin: true,
+          secure: false,
+        }
       }
-    }
+    } : undefined
   }
 })
