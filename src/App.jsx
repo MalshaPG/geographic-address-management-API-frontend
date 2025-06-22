@@ -35,7 +35,15 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="header">
+        <header className="header width-fit flex align-right margin-left">
+          <div className="logo-container" style={{ width: '35%', display: 'flex', alignItems: 'center', marginLeft: '15px' }}>
+            <img
+              src="/slt.png"
+              alt="Logo"
+              className="logo"
+              style={{ maxWidth: '50%', height: 'auto', display: 'block' }}
+            />
+          </div>
           <div className="container">
             <h1>Geographic Address Management</h1>
             <Navigation />
