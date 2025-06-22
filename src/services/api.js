@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = '/tmf-api'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL + '/tmf-api' || 'http://localhost:8080'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -11,7 +11,6 @@ const api = axios.create({
 
 // Geographic Address API
 export const addressAPI = {
-  // Get all addresses with optional filters
   getAddresses: (filters = {}) => {
     const params = new URLSearchParams()
     Object.entries(filters).forEach(([key, value]) => {
@@ -20,7 +19,6 @@ export const addressAPI = {
     return api.get(`/geographicAddress?${params.toString()}`)
   },
 
-  // Get address by ID
   getAddressById: (id, filters = {}) => {
     const params = new URLSearchParams()
     Object.entries(filters).forEach(([key, value]) => {
@@ -29,12 +27,10 @@ export const addressAPI = {
     return api.get(`/geographicAddress/${id}?${params.toString()}`)
   },
 
-  // Get sub-addresses for an address
   getSubAddresses: (addressId) => {
     return api.get(`/geographicAddress/${addressId}/geographicSubAddress`)
   },
 
-  // Get specific sub-address
   getSubAddress: (addressId, subAddressId) => {
     return api.get(`/geographicAddress/${addressId}/geographicSubAddress/${subAddressId}`)
   },
@@ -42,12 +38,10 @@ export const addressAPI = {
 
 // Address Validation API
 export const validationAPI = {
-  // Create address validation
   createValidation: (validationData) => {
     return api.post('/geographicAddressValidation', validationData)
   },
 
-  // Get all validations with optional filters
   getValidations: (filters = {}) => {
     const params = new URLSearchParams()
     Object.entries(filters).forEach(([key, value]) => {
@@ -58,7 +52,6 @@ export const validationAPI = {
     return api.get(`/geographicAddressValidation?${params.toString()}`)
   },
 
-  // Get validation by ID
   getValidationById: (id, filters = {}) => {
     const params = new URLSearchParams()
     Object.entries(filters).forEach(([key, value]) => {
@@ -67,7 +60,6 @@ export const validationAPI = {
     return api.get(`/geographicAddressValidation/${id}?${params.toString()}`)
   },
 
-  // Update validation
   updateValidation: (id, updates) => {
     return api.patch(`/geographicAddressValidation/${id}`, updates, {
       headers: {
