@@ -7,7 +7,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/tmf-api': {
-        target: 'http://localhost:80',
+        target: 'https://geographic-address-management-api.onrender.com',
         changeOrigin: true,
         secure: false,
       }
